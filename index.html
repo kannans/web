@@ -20,48 +20,85 @@
 		<script src="assets/js/dsl.js" type="text/javascript" charset="utf-8"></script>
 		
 		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
-		
+		<style type="text/css" media="screen">@import "assets/css/jqtouch.css";</style>
+        <script src="assets/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="assets/js/jqtouch.min.js" type="text/javascript" charset="utf-8"></script>
 
 
- <script type="text/javascript" charset="utf-8">
+        <script type="text/javascript" charset="utf-8">
+            var jQT = new $.jQTouch({
+                icon: 'jqtouch.png',
+                addGlossToIcon: false,
+                startupScreen: 'jqt_startup.png',
+                statusBar: 'black',
+                preloadImages: [
+                    '../../themes/jqt/img/back_button.png',
+                    '../../themes/jqt/img/back_button_clicked.png',
+                    '../../themes/jqt/img/button_clicked.png',
+                    '../../themes/jqt/img/grayButton.png',
+                    '../../themes/jqt/img/whiteButton.png',
+                    'assets/img/loading.gif'
+                    ]
+            });
 
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
+            $(function(){
+                jQT.addAnimation({
+                    name: 'reveal',
+                    selector: '.revealme'
+                });
+            });
+        </script>
+        <style type="text/css" media="screen">
+            div#jqt .reveal.in {
+                -webkit-animation-name: dontmove;
+                z-index: 0;
+            }
 
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-        db.transaction(populateDB, errorCB, successCB);
-    }
+            div#jqt .reveal.out {
+                -webkit-animation-name: revealout;
+                z-index: 10;
+            }
 
-    // Populate the database 
-    //
-    function populateDB(tx) {
-         tx.executeSql('DROP TABLE IF EXISTS DEMO');
-         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
-    }
+            div#jqt .reveal.out.reverse {
+                z-index: 0;
+                -webkit-animation-name: dontmove;
+            }
 
-    // Transaction error callback
-    //
-    function errorCB(tx, err) {
-        alert("Error processing SQL: "+err);
-    }
+            div#jqt .reveal.in.reverse {
+                z-index: 10;
+                -webkit-animation-name: revealin;
+            }
 
-    // Transaction success callback
-    //
-    function successCB() {
-        alert("success!");
-    }
 
-    </script>
+            @-webkit-keyframes revealin {
+                from { -webkit-transform: translateX(100%); }
+                to { -webkit-transform: translateX(0); }
+            }
+
+            @-webkit-keyframes revealout {
+                from { -webkit-transform: translateX(0); }
+                to { -webkit-transform: translateX(100%); }
+            }
+        </style>
+
+
+  
 	</head>
         <body>
-          
-          <h1>Example DB</h1>
-          <p>Database</p>
+          <body>
+        <div id="jqt">
+            <div id="test">
+                <ul class="rounded">
+                    <li><a class="revealme" href="#page2">Test Reveal</a></li>
+                </ul>
+            </div>
+            <div id="page2">
+                <div style="font-size: 1.5em; text-align: center; margin: 160px 0 160px; font-family: Marker felt;">
+                    Pretty smooth, eh?            
+                </div>
+                <a style="margin:0 10px;color:rgba(0,0,0,.9)" href="#" class="whiteButton goback">Go back</a>
+            </div>
+        </div>
+    </body>
         </body>        
 </html>
