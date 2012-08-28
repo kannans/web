@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
-		<title>Training App</title>
+		<title>Play Music</title>
 		<link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />		
 		<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>		
         <script src="jquery.js" type="text/javascript" charset="utf-8"></script>      
@@ -84,6 +84,7 @@
         //
         function playAudio(src) {
             // Create Media object from src
+            stopAudio();
             my_media = new Media(src, onSuccess, onError);
 
             // Play audio
@@ -112,17 +113,19 @@
 
         // Pause audio
         // 
-        function pauseAudio() {             
+        function pauseAudio() {                   
             if (my_media) {
                 my_media.pause();
+                
             }
         }
 
         // Stop audio
         // 
-        function stopAudio() {
+        function stopAudio() {          
             if (my_media) {
                 my_media.stop();
+                alert('stopAudio');
             }
             clearInterval(mediaTimer);
             mediaTimer = null;
@@ -132,6 +135,7 @@
         //
         function onSuccess() {
             console.log("playAudio():Audio Success");
+            alert('success');
         }
 
         // onError Callback 
@@ -154,7 +158,7 @@
         
         <div data-role="content" class="ui-content" role="main">   
             <ul data-role="listview" data-theme="a" data-divider-theme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search documentation..." class="ui-listview">
-                
+
               <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Bill2</a></li>
 
              <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Gangster.mp3');">Gangster</a></li>
@@ -165,8 +169,10 @@
 
            </div>
         <div>
-        <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
-        <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+        <input type="button" value="Pause" onclick="pauseAudio();"/> 
+        <br>
+        <input type="button" data-theme="e" value="Stop" onclick="stopAudio();" />
+        <br>
         <p id="audio_position"></p>
     </body>
 </html>
