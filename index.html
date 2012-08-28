@@ -64,8 +64,7 @@
 
 
 
-
-<script type="text/javascript" charset="utf-8">
+       <script type="text/javascript" charset="utf-8">
 
         // Wait for Cordova to load
         //
@@ -74,7 +73,8 @@
         // Cordova is ready
         //
         function onDeviceReady() {
-            playAudio("http://inisaipaadal.com/download.php?f=2012/Billa%202/Madurai%20Ponnu&sid=30a772e807f2899e9b81417620bf2440");
+            alert "http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3";
+            playAudio("http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3");
         }
 
         // Audio player
@@ -115,6 +115,7 @@
         // Pause audio
         // 
         function pauseAudio() {
+             alert 'pause';
             if (my_media) {
                 my_media.pause();
             }
@@ -150,7 +151,6 @@
         }
 
         </script>
-  
 	</head>
     <body class="ui-mobile-viewport ui-overlay-a"> 
         <div data-role="page" data-theme="a" class="nav-search ui-page ui-body-a ui-page-active" data-url="/test/docs/nav.html" tabindex="0" style="min-height: 665px; ">
@@ -169,11 +169,10 @@
              </ul>
         </div><!-- /page -->
         <div>
-        <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/download.php?f=2012/Billa%202/Madurai%20Ponnu&sid=30a772e807f2899e9b81417620bf2440');">Play Audio</a>
-        <br>
-          <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
-          <br>
-          <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+
+           <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Play Audio</a>
+        <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
+        <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
         <p id="audio_position"></p>
     </body>
 </html>
