@@ -65,15 +65,13 @@
 
 
        <script type="text/javascript" charset="utf-8">
-
-        // Wait for Cordova to load
+       
         //
         document.addEventListener("deviceready", onDeviceReady, false);
 
         // Cordova is ready
         //
         function onDeviceReady() {
-            alert "http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3";
             playAudio("http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3");
         }
 
@@ -114,8 +112,7 @@
 
         // Pause audio
         // 
-        function pauseAudio() {
-             alert 'pause';
+        function pauseAudio() {             
             if (my_media) {
                 my_media.pause();
             }
@@ -170,7 +167,7 @@
         </div><!-- /page -->
         <div>
 
-           <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Play Audio</a>
+       <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Play Audio</a>
         <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
         <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
         <p id="audio_position"></p>
