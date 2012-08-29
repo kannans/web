@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="assets/js/jquery-1.7.1.min.js"></script>
     <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+    <script src="assets/js/data.js"></script>
+
     <script>
       // all dialog buttons should close their parent dialog
       $(".ui-dialog button").live("click", function() {		
@@ -34,147 +36,27 @@
       #footerTabs {
       background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
       }
-    </style>
-    
-<script type="text/javascript" charset="utf-8">      
-  //
- document.addEventListener("deviceready", onDeviceReady, false);
-
-function populateDB(tx) {
-  tx.executeSql('DROP TABLE IF EXISTS DEMO');
-  tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-  tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-  tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
-}
-
-function queryDB(tx) {
-  tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
-}
-
-
-function querySuccess(tx, results) {
-  var len = results.rows.length;
-  console.log("DEMO table: " + len + " rows found.");
-  for (var i=0; i<len; i++){
-    //console.log("Row = " + i + " ID = " + results.rows.item(i).id +
-    //" Data =  " + results.rows.item(i).data);
-    alert(results.rows.item(i).data);
-
-    $('#filelist').append('<li>'+results.rows.item(i).data +'</li>')
-  }
-}
-
-function errorCB(err) {
-  console.log("Error processing SQL: "+err.code);
-}
-
-
-function successCB() {
-  var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-  db.transaction(queryDB, errorCB);
-}
-
-
-function onDeviceReady() {
-  var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-  db.transaction(populateDB, errorCB, successCB);
-}
-
-// Audio player
-//
-var my_media = null;
-var mediaTimer = null;
-
-// Play audio
-//
-function playAudio(src) {
-  // Create Media object from src           
-  alert('hi');
-  my_media = new Media(src, onSuccess, onError);
-  
-  // Play audio
-  my_media.play();
-  
-  // Update my_media position every second
-  if (mediaTimer == null) {
-    mediaTimer = setInterval(function() {
-      // get my_media position
-      my_media.getCurrentPosition(
-        // success callback
-        function(position) {
-          if (position > -1) {
-            setAudioPosition((position) + " sec");
-          }
-        },
-        // error callback
-        function(e) {
-          console.log("Error getting pos=" + e);
-          setAudioPosition("Error: " + e);
-        }
-      );
-    }, 1000);
-  }
-}
-
-// Pause audio
-// 
-function pauseAudio() {                   
-  if (my_media) {
-    my_media.pause();
-    
-  }
-}
-
-// Stop audio
-// 
-function stopAudio() {          
-  if (my_media) {
-    my_media.stop();               
-  }
-  clearInterval(mediaTimer);
-  mediaTimer = null;
-}
-
-// onSuccess Callback
-//
-function onSuccess() {
-  console.log("playAudio():Audio Success");         
-}
-
-// onError Callback 
-//
-function onError(error) {
-  alert('code: '    + error.code    + '\n' + 
-        'message: ' + error.message + '\n');
-}
-
-// Set audio position
-// 
-function setAudioPosition(position) {
-  document.getElementById('audio_position').innerHTML = position;
-}
-
-</script>
+    </style>    
 
   </head> 
-  <body class="ui-mobile-viewport ui-overlay-c"> 
-    
-    <div data-role="page"> 
-      <div data-role="header" data-position="fixed"> 
-        <h1 class="ui-title" role="heading" aria-level="1">Panda Music</h1>
-      </div><!-- /header --> 
+
+    <body class="ui-mobile-viewport ui-overlay-c"> 
       
-      <div data-role="content"> 
-	<ul data-role="listview" data-inset="true" > 	
-	  <li><a href="#listViews"> Search Music</a></li> 
-	  <li><a href="#dialogs">About</a></li> 
-	</ul> 
-	
-	<br />
-	
-	<br />
-      </div><!-- /ui-body wrapper -->	
-    </div><!-- /page --> 
+      <div data-role="page"> 
+        <div data-role="header" data-position="fixed"> 
+          <h1 class="ui-title" role="heading" aria-level="1">Panda Music</h1>
+        </div><!-- /header --> 
+        
+        <div data-role="content"> 
+  	<ul data-role="listview" data-inset="true" > 	
+  	  <li><a href="#listViews"> Search Music</a></li> 
+  	  <li><a href="#dialogs">About</a></li> 
+  	</ul> 
+  	
+    <br />	
+	  <br />
+   </div><!-- /ui-body wrapper -->	
+  </div><!-- /page --> 
     
     
     <div data-role="page" id="listViews">
@@ -207,7 +89,7 @@ function setAudioPosition(position) {
   </div>
 
   <div data-role="content"> 
-    <button data-theme="e" onclick ="playAudio();">Play</button>  
+    <button data-theme="e" onclick ="playAudio('assests/mp3/Backstreet.mp3');">Play</button>  
   </div>  
 </div>
 
