@@ -35,91 +35,124 @@
       background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
       }
     </style>
+    
+<script type="text/javascript" charset="utf-8">      
+  //
+ document.addEventListener("deviceready", onDeviceReady, false);
 
-    <script type="text/javascript" charset="utf-8">      
-      //
-      document.addEventListener("deviceready", onDeviceReady, false);
+function populateDB(tx) {
+  tx.executeSql('DROP TABLE IF EXISTS DEMO');
+  tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+  tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+  tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+}
 
-      // Cordova is ready
-      //
-      function onDeviceReady() {
-      playAudio("http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3");
-      }
+function queryDB(tx) {
+  tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+}
 
-      // Audio player
-      //
-      var my_media = null;
-      var mediaTimer = null;
 
-      // Play audio
-      //
-      function playAudio(src) {
-      // Create Media object from src           
-      my_media = new Media(src, onSuccess, onError);
+function querySuccess(tx, results) {
+  var len = results.rows.length;
+  console.log("DEMO table: " + len + " rows found.");
+  for (var i=0; i<len; i++){
+    //console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
+    $('#filelist').append('<li>'+results.rows.item(i).data +'</li>')
+  }
+}
 
-      // Play audio
-      my_media.play();
+function errorCB(err) {
+  console.log("Error processing SQL: "+err.code);
+}
 
-      // Update my_media position every second
-      if (mediaTimer == null) {
-      mediaTimer = setInterval(function() {
+
+function successCB() {
+  var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+  db.transaction(queryDB, errorCB);
+}
+
+
+function onDeviceReady() {
+  var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+  db.transaction(populateDB, errorCB, successCB);
+}
+
+// Audio player
+//
+var my_media = null;
+var mediaTimer = null;
+
+// Play audio
+//
+function playAudio(src) {
+  // Create Media object from src           
+  alert('hi');
+  my_media = new Media(src, onSuccess, onError);
+  
+  // Play audio
+  my_media.play();
+  
+  // Update my_media position every second
+  if (mediaTimer == null) {
+    mediaTimer = setInterval(function() {
       // get my_media position
       my_media.getCurrentPosition(
-      // success callback
-      function(position) {
-      if (position > -1) {
-      setAudioPosition((position) + " sec");
-      }
-      },
-      // error callback
-      function(e) {
-      console.log("Error getting pos=" + e);
-      setAudioPosition("Error: " + e);
-      }
+        // success callback
+        function(position) {
+          if (position > -1) {
+            setAudioPosition((position) + " sec");
+          }
+        },
+        // error callback
+        function(e) {
+          console.log("Error getting pos=" + e);
+          setAudioPosition("Error: " + e);
+        }
       );
-      }, 1000);
-      }
-      }
+    }, 1000);
+  }
+}
 
-      // Pause audio
-      // 
-      function pauseAudio() {                   
-      if (my_media) {
-      my_media.pause();
-      
-      }
-      }
+// Pause audio
+// 
+function pauseAudio() {                   
+  if (my_media) {
+    my_media.pause();
+    
+  }
+}
 
-      // Stop audio
-      // 
-      function stopAudio() {          
-      if (my_media) {
-      my_media.stop();               
-      }
-      clearInterval(mediaTimer);
-      mediaTimer = null;
-      }
+// Stop audio
+// 
+function stopAudio() {          
+  if (my_media) {
+    my_media.stop();               
+  }
+  clearInterval(mediaTimer);
+  mediaTimer = null;
+}
 
-      // onSuccess Callback
-      //
-      function onSuccess() {
-      console.log("playAudio():Audio Success");         
-      }
+// onSuccess Callback
+//
+function onSuccess() {
+  console.log("playAudio():Audio Success");         
+}
 
-      // onError Callback 
-      //
-      function onError(error) {
-      alert('code: '    + error.code    + '\n' + 
-      'message: ' + error.message + '\n');
-      }
+// onError Callback 
+//
+function onError(error) {
+  alert('code: '    + error.code    + '\n' + 
+        'message: ' + error.message + '\n');
+}
 
-      // Set audio position
-      // 
-      function setAudioPosition(position) {
-      document.getElementById('audio_position').innerHTML = position;
-      }
+// Set audio position
+// 
+function setAudioPosition(position) {
+  document.getElementById('audio_position').innerHTML = position;
+}
 
-    </script>
+</script>
+
   </head> 
   <body class="ui-mobile-viewport ui-overlay-c"> 
     
@@ -129,7 +162,7 @@
       </div><!-- /header --> 
       
       <div data-role="content"> 
-	<ul data-role="listview" data-inset="true"> 	
+	<ul data-role="listview" data-inset="true" > 	
 	  <li><a href="#listViews"> Search Music</a></li> 
 	  <li><a href="#dialogs">About</a></li> 
 	</ul> 
@@ -140,33 +173,47 @@
       </div><!-- /ui-body wrapper -->	
     </div><!-- /page --> 
     
- 
     
     <div data-role="page" id="listViews">
       
       <div data-role="header" data-position="fixed">
-	<h1>Panda Music</h1>
-	<a href="#" data-rel="back" data-theme="c">Back</a>
+        <h1>List Example</h1>
+        <a href="#" data-rel="back" data-theme="a">Back</a>
       </div><!-- /header --> 
-
       
-      <div data-role="content"> 		
-	<ul data-role="listview"  data-filter="true" data-filter-theme="c" data-filter-placeholder="Search Music..." class="ui-listview"> 
-	  <li data-role="list-divider">Divider</li>	  
-          <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Bill2</a></li>
-          
-          <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Gangster.mp3');">Gangster</a></li>
-          
-          <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Enakkulay%20Oru%20Mirugam.mp3');">Enakulea mirugam</a></li>
-          <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Idhayam.mp3');">Idhayam</a></li>  
-	</ul> 
-	
-      </div>      
-    </div>    
-  </div>
+      <div data-role="content"> 
+        
+        <ul data-role="listview"  data-filter="true" data-filter-theme="c" data-filter-placeholder="Search Music..." class="ui-listview" id="filelist"> 
+          <li data-role="list-divider">Divider</li>   
+          <li> <a href="#allDialogExample">Bill2</a></li>
+        </ul> 
+        
+      </div>     
+    </div> 
+</div>   
+
+
+<div data-role="page" id="allDialogExample">   
+  <div data-role="header" data-position="fixed">
+    <h1>List Example</h1>
+    <a href="#" data-rel="back" data-theme="a">Back</a>
+  </div><!-- /header --> 
   
+  <div>
+    File Name:
+  </div>
+
+  <div data-role="content"> 
+    <button data-theme="e" onclick ="playAudio();">Play</button>  
+  </div>  
 </div>
- 
+
+
+</div>    
+</div>
+
+</div>
+
 </div>  
 </div>
 
