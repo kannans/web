@@ -57,7 +57,7 @@
             // Create Media object from src
 
       alert(getPhoneGapPath() + src);
-            my_media = new Media( getPhoneGapPath() + src, onError);
+            my_media = new Media(src, onError);
 
             // Play audio
             my_media.play();
@@ -146,7 +146,7 @@
       </div>
       
       <div data-role="content"> 
-        <button data-theme="e" onclick ="playAudio('assets/mp3/Backstreet.mp3');">Play</button>  
+        <button data-theme="e" onclick ="playAudio('./assets/mp3/Backstreet.mp3');">Play</button>  
       </div>  
     </div>
 </div>    
