@@ -7,7 +7,6 @@ mediaTimer = null;
 // Play audio
 
 function playAudio(src) {
-
   alert(src);
   my_media = new Media(src, onSuccess, onError); 
 

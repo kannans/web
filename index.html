@@ -21,6 +21,7 @@
     <script src="assets/js/jquery-1.7.1.min.js"></script>
     <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
     <script src="assets/js/data.js"></script>
+    <script src="assets/js/storage.js"></script>
 
     <script>
       // all dialog buttons should close their parent dialog
@@ -39,24 +40,24 @@
     </style>    
 
   </head> 
-
-    <body class="ui-mobile-viewport ui-overlay-c"> 
-      
-      <div data-role="page"> 
+  
+  <body class="ui-mobile-viewport ui-overlay-c"> 
+    
+    <div data-role="page"> 
         <div data-role="header" data-position="fixed"> 
           <h1 class="ui-title" role="heading" aria-level="1">Panda Music</h1>
         </div><!-- /header --> 
         
         <div data-role="content"> 
-  	<ul data-role="listview" data-inset="true" > 	
-  	  <li><a href="#listViews"> Search Music</a></li> 
-  	  <li><a href="#dialogs">About</a></li> 
-  	</ul> 
-  	
-    <br />	
+  	  <ul data-role="listview" data-inset="true" > 	
+  	    <li><a href="#listViews"> Search Music</a></li> 
+  	    <li><a href="#dialogs">About</a></li> 
+  	  </ul> 
+  	  
+          <br />	
 	  <br />
-   </div><!-- /ui-body wrapper -->	
-  </div><!-- /page --> 
+        </div><!-- /ui-body wrapper -->	
+    </div><!-- /page --> 
     
     
     <div data-role="page" id="listViews">
@@ -71,37 +72,28 @@
         <ul data-role="listview"  data-filter="true" data-filter-theme="c" data-filter-placeholder="Search Music..." class="ui-listview" id="filelist"> 
           <li data-role="list-divider">Divider</li>   
           <li> <a href="#allDialogExample">Bill2</a></li>
-        </ul> 
+        </ul>        
         
-      </div>     
-    </div> 
-</div>   
+      </div> 
+    </div>   
 
 
-<div data-role="page" id="allDialogExample">   
-  <div data-role="header" data-position="fixed">
-    <h1>List Example</h1>
-    <a href="#" data-rel="back" data-theme="a">Back</a>
-  </div><!-- /header --> 
-  
-  <div>
-    File Name:
-  </div>
-
-  <div data-role="content"> 
-    <button data-theme="e" onclick ="playAudio('assests/mp3/Backstreet.mp3');">Play</button>  
-  </div>  
-</div>
-
-
+    <div data-role="page" id="allDialogExample">   
+      <div data-role="header" data-position="fixed">
+        <h1>List Example</h1>
+        <a href="#" data-rel="back" data-theme="a">Back</a>
+      </div><!-- /header --> 
+      
+      <div>
+        File Name:
+      </div>
+      
+      <div data-role="content"> 
+        <button data-theme="e" onclick ="playAudio('assests/mp3/Backstreet.mp3');">Play</button>  
+        <button data-theme="e" onclick ="playAudio('/android_asset/www/Backstreet.mp3');">Play</button>  
+        <button data-theme="e" onclick ="playAudio('/android_asset/www/assests/mp3/Backstreet.mp3');">Play</button>  
+      </div>  
+    </div>
 </div>    
-</div>
-
-</div>
-
-</div>  
-</div>
-
-
 </body> 
 </html> 
