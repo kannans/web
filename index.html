@@ -83,8 +83,7 @@
         // Play audio
         //
         function playAudio(src) {
-            // Create Media object from src
-            stopAudio();
+            // Create Media object from src           
             my_media = new Media(src, onSuccess, onError);
 
             // Play audio
@@ -124,8 +123,7 @@
         // 
         function stopAudio() {          
             if (my_media) {
-                my_media.stop();
-                alert('stopAudio');
+                my_media.stop();               
             }
             clearInterval(mediaTimer);
             mediaTimer = null;
@@ -134,8 +132,7 @@
         // onSuccess Callback
         //
         function onSuccess() {
-            console.log("playAudio():Audio Success");
-            alert('success');
+            console.log("playAudio():Audio Success");         
         }
 
         // onError Callback 
@@ -153,11 +150,12 @@
 
         </script>
 	</head>
-    <body class="ui-mobile-viewport ui-overlay-a"> 
+       <body> 
+  
         <div data-role="page" data-theme="a" class="nav-search ui-page ui-body-a ui-page-active" data-url="/test/docs/nav.html" tabindex="0" style="min-height: 665px; ">
         
         <div data-role="content" class="ui-content" role="main">   
-            <ul data-role="listview" data-theme="a" data-divider-theme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search documentation..." class="ui-listview">
+            <ul data-role="listview" data-theme="a" data-divider-theme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search Music..." class="ui-listview">
 
               <li> <a href="#" class="btn large" onclick="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Bill2</a></li>
 
@@ -169,7 +167,7 @@
 
            </div>
         <div>
-        <input type="button" value="Pause" onclick="pauseAudio();"/> 
+        <input type="button" data-theme="b" value="Pause" onclick="pauseAudio();"/> 
         <br>
         <input type="button" data-theme="e" value="Stop" onclick="stopAudio();" />
         <br>
