@@ -56,7 +56,7 @@
        function playAudio(src) {
             // Create Media object from src
 
-      alert(getPhoneGapPath() + src);
+      alert(src);
             my_media = new Media(src, onError);
 
             // Play audio
@@ -146,7 +146,7 @@
       </div>
       
       <div data-role="content"> 
-        <button data-theme="e" onclick ="playAudio('./assets/mp3/small.mp3');">Play</button>  
+        <button data-theme="e" onclick ="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Play</button>  
       </div>  
     </div>
 </div>    
