@@ -1,5 +1,5 @@
-   
-    document.addEventListener("deviceready", onDeviceReady, false);
+
+document.addEventListener("deviceready", onDeviceReady, false);
 
     // Populate the database 
     //
