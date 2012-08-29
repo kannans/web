@@ -2,6 +2,8 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
     // Populate the database 
+
+    alert ('sdf');
     //
     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS DEMO');

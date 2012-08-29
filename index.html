@@ -76,10 +76,9 @@
   <body class="ui-mobile-viewport ui-overlay-c"> 
     
     <div data-role="page"> 
-       <div data-role="header" data-position="inline">
-       <h1>Blue Bar</h1>
-      <a href="#about" data-theme="a">About</a>
-    </div>
+        <div data-role="header" data-position="fixed"> 
+          <h1 class="ui-title" role="heading" aria-level="1">Panda Music</h1>
+        </div><!-- /header --> 
         
         <div data-role="content"> 
   	  <ul data-role="listview" data-inset="true" > 	
@@ -121,28 +120,9 @@
       </div>
       
       <div data-role="content"> 
-        <button data-theme="e" onclick ="playAudio('Backstreet.mp3');">Play</button>  
+        <button data-theme="e" onclick ="playAudio('assets/mp3/Backstreet.mp3');">Play</button>  
       </div>  
     </div>
-
-
-     <div data-role="page" id="about">
-      
-      <div data-role="header" data-position="fixed">
-        <h1>About</h1>
-        <a href="#" data-rel="back" data-theme="a">Back</a>
-      </div><!-- /header --> 
-      
-      <div data-role="content"> 
-        
-         <p>
-            Panda Music
-         </p>   
-        
-      </div> 
-    </div>  
-
-
 </div>    
 </body> 
 </html> 
