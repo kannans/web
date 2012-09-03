@@ -1,175 +1,290 @@
-<!DOCTYPE html> 
-<html> 
-  <head> 
+<!DOCTYPE html>
+<head>
+<title>Panda Web</title>
+ <meta charset="utf-8" /> 
+ <title>Panda Music</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"> 	 
+ <meta name="apple-mobile-web-app-capable" content="yes"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+</head>
+<style type="text/css">
+ #home h4{text-align: center;}
+ #home-logo{width:100%;}
+ footer {font-size:8px;	text-align:center;}
+ .ui-grid-a img{width:100%;} 
+ .ui-block-a a,.ui-block-b a{text-decoration: none; font-size:80%}  
+</style>
+<body>
+	
+ 
+<div data-role="page" id="home">	 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home"  class="ui-btn-active ui-state-persist" data-transition="flip" data-icon="home">Home</a></li>
+				<li><a href="#service" data-role="button" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button" data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button"  data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div data-role="content"> 	
+		<img src='logo.png' id="home-logo" />
+		<h4>PASSIONATE WEB DEVELOPERS BUILDING THINGS THAT BRING JOY TO THE USERS</h4>
+		<ul data-role="listview" data-inset="true" id="home-list-image">
+			<li><a href="#ruby" data-transition="pop"> <img src="ruby_on_rails_logo.png"/>Ruby on rails</a></li>
+			<li><a href="#responsive" data-transition="pop"> <img src="responsive_logo.png"/> Responsive </a></li>
+			<li><a href="#phonegap" data-transition="pop"> <img src="phonegap_logo.png"/>Phone Gap</a></li>
+			<li><a href="#facebook" data-transition="pop"> <img src="facebook_logo.png"/>Facebook App</a></li>
+		</ul>					
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>		
+	</div>		
+</div> 
 
-    <meta charset="utf-8" /> 
-    <title>Panda Music</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"> 	 
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="assets/css/master.css" type="text/css" media="screen" />       
-    <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>      
-    <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
-    <script src="assets/js/xui.js" type="text/javascript" charset="utf-8"></script>     
-    <script src="assets/js/lawnchair/adaptors/LawnchairAdaptorHelpers.js" type="text/javascript" charset="utf-8"></script>  
-    <script src="assets/js/lawnchair/adaptors/DOMStorageAdaptor.js" type="text/javascript" charset="utf-8"></script>        
-    <script src="assets/js/lawnchair/adaptors/WebkitSQLiteAdaptor.js" type="text/javascript" charset="utf-8"></script>      
-    <script src="assets/js/lawnchair/Lawnchair.js" type="text/javascript" charset="utf-8"></script>     
-    <script src="assets/js/dsl.js" type="text/javascript" charset="utf-8"></script>     
-    <script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet"  href="assets/css/jquery.mobile-1.1.0.min.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <script src="assets/js/jquery-1.7.1.min.js"></script>
-    <script src="assets/js/jquery.mobile-1.1.0.min.js"></script>
-     
-
-    <style>
-      #footerTabs {
-      background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
-      }
-    </style>    
-
-
-<script type="text/javascript" charset="utf-8">
-
-        // Wait for Cordova to load
-        //
-        document.addEventListener("deviceready", onDeviceReady, false);
-
-        // Cordova is ready
-        //
-        function onDeviceReady() {
-            playAudio("http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3");
-        }
-
-        // Audio player
-        //
-        var my_media = null;
-        var mediaTimer = null;
-
-       
-        function playAudio(src) {
-            if (my_media == null) {
-                // Create Media object from src
-                my_media = new Media(src, onSuccess, onError);
-            } // else play current audio
-            // Play audio
-            my_media.play();
-
-            // Update my_media position every second
-            if (mediaTimer == null) {
-                mediaTimer = setInterval(function() {
-                    // get my_media position
-                    my_media.getCurrentPosition(
-                        // success callback
-                        function(position) {
-                            if (position > -1) {
-                                setAudioPosition((position) + " sec");
-                            }
-                        },
-                        // error callback
-                        function(e) {
-                            console.log("Error getting pos=" + e);
-                            setAudioPosition("Error: " + e);
-                        }
-                    );
-                }, 1000);
-            }
-        }
-
-        // Pause audio
-        // 
-        function pauseAudio() {
-            if (my_media) {
-                my_media.pause();
-            }
-        }
-
-        // Stop audio
-        // 
-        function stopAudio() {
-            if (my_media) {
-                my_media.stop();
-            }
-            clearInterval(mediaTimer);
-            mediaTimer = null;
-        }
-
-        // onSuccess Callback
-        //
-        function onSuccess() {
-            console.log("playAudio():Audio Success");
-        }
-
-        // onError Callback 
-        //
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' + 
-                  'message: ' + error.message + '\n');
-        }
-
-        // Set audio position
-        // 
-        function setAudioPosition(position) {
-            document.getElementById('audio_position').innerHTML = position;
-        }
-
-        </script>
-
-
-  </head> 
-  
-  <body class="ui-mobile-viewport ui-overlay-c"> 
-    
-    <div data-role="page"> 
-        <div data-role="header" data-position="fixed"> 
-          <h1 class="ui-title" role="heading" aria-level="1">Panda Music</h1>
-        </div><!-- /header --> 
-        
-        <div data-role="content"> 
-  	  <ul data-role="listview" data-inset="true" > 	
-  	    <li><a href="#listViews"> Search Music</a></li>   	   
-  	  </ul> 
-  	  
-          <br />	
-	  <br />
-        </div><!-- /ui-body wrapper -->	
-    </div><!-- /page --> 
-    
-    
-    <div data-role="page" id="listViews">
-      
-      <div data-role="header" data-position="fixed">
-        <h1>List Example</h1>
-        <a href="#" data-rel="back" data-theme="a">Back</a>
-      </div><!-- /header --> 
-      
-      <div data-role="content"> 
-        
-        <ul data-role="listview"  data-filter="true" data-filter-theme="c" data-filter-placeholder="Search Music..." class="ui-listview" id="filelist"> 
-          <li data-role="list-divider">Divider</li>   
-          <li> <a href="#allDialogExample">Bill2</a></li>
-        </ul>        
-        
-      </div> 
-    </div>   
+<div data-role="page" id="service">
+ 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip" >Home</a></li>
+				<li><a href="#service"  class="ui-btn-active ui-state-persist" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button" data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button" data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>	
+	<div data-role="content"> 	
+		<h3>Our Services</h3>
+		<br></br>
+		<ul data-role="listview" data-inset="true">
+			<li><a href="#ruby" data-transition="slidedown" > Ruby on rails</a></li>
+			<li><a href="#responsive" data-transition="flip">  Responsive </a></li>
+			<li><a href="#phonegap" data-transition="pop" > Phone Gap</a></li>
+			<li><a href="#facebook" data-transition="slideup" > Facebook App</a></li>
+		</ul>		
+		 
+	</div>	
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>		
+</div>
+ 
+<div data-role="page" id="portfolio">
+ 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href="#service" data-role="button" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" class="ui-btn-active ui-state-persist"  data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button" data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div class= "content" data-role="content"> 	
+		<h3>Portfolio</h3>
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href='http://www.cibeles.com.mx/' target='new'>Cibeles<img src="cibeles.jpg"/></a></div>
+			<div class="ui-block-b"><a href='http://lafloridahostal.com/' target='new'>Laflorida<img src="laflorida_hostal.jpg"/></a></div>		
+			<div class="ui-block-a"><a href='http://marionaotero.com/' target='new'>Mariona<img src="mariona.jpg"/></a></div>
+			<div class="ui-block-b"><a href='http://sadya.org/' target='new'>Sadya<img src="sadya.jpg"/></a></div>		
+			<div class="ui-block-a"><a href='http://www.corporativoimportex.com/' target='new'>importex<img src="importex.jpg"/></a></div>
+			<div class="ui-block-b"><a href='#' target='new'>Varchas<img src="varchas_01.jpg"/></a></div>			 
+									
+		</div>
+		
+	</div>		
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>	
+</div>
+ 
+<div data-role="page" id="contact">
+	 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href="#service" data-role="button" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button" data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" class="ui-btn-active ui-state-persist"  data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div data-role="content"> 	
+	<form method="get" action="">
+		<fieldset data-role="fieldcontain">
+			<label for="username" >Your Name:</label>
+			<input type="text" name="username" id="username" placeholder="Your Name..">
+			<br>	
+			<label for="email" >Your Email:</label>
+			<input type="email" name="email" id="email" placeholder="Your Email..">
+			<br>	
+			<label for="company">Your Company:</label>
+			<input type="text" name="company" id="company" placeholder="Your Company..">
+			<br>	
+   		<label for="message" >Message:</label>
+   		<textarea  name="submit" id="message" placeholder="Your Message Here.."></textarea>
+			<br>	<br>		 
+   		  <button id="btnLogin" type="submit" data-theme="c"> Submit</button></div>
+	</fieldset>
+	</form>
+	 	
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>
+</div> 
+ 
+ 
 
 
-    <div data-role="page" id="allDialogExample">   
-      <div data-role="header" data-position="fixed">
-        <h1>List Example</h1>
-        <a href="#" data-rel="back" data-theme="a">Back</a>
-      </div><!-- /header --> 
-      
-      <div>
-        <b> File Name</b> : Backstreet.mp3
-        <p id="audio_position"></p>
-      </div>
-      
-      <div data-role="content"> 
-        <button data-theme="e" onclick ="playAudio('file:///android_asset/www/assets/mp3/small.mp3');">Play</button>  
-        <button data-theme="e" onclick ="playAudio('http://inisaipaadal.com/files/2012/Billa%202/Madurai%20Ponnu.mp3');">Play</button>  
-      </div>  
-    </div>
-</div>    
-</body> 
-</html> 
+<!-- Service page Contents -->
+
+<div data-role="page" id="ruby"> 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href="#service" class="ui-btn-active ui-state-persist" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button"   data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button" data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div data-role="content"> 	
+		<img src="ruby_on_rails_logo.png"></img>
+		<h3>Ruby On Rails</h3>
+		<p>
+			We build applications using Ruby On Rails which enable us to be agile and productive.
+			We provide you Web Solutions that are fast, reliable, scalable and highly customized for your needs. 
+			We take on a client project and make their idea an online business.
+		</p>		
+			<span data-icon="check">Application Development</span>
+			<br>
+   		<span data-icon="check">ERP, CRM and Custom Applications</span>
+	</div>		
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>	
+</div>
+ 
+
+<div data-role="page" id="responsive"> 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href="#service" class="ui-btn-active ui-state-persist" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button" data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button" data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div data-role="content"> 	
+	<img src="responsive_logo.png"/> 
+		<h3>Responsive Web Site</h3>
+		<p>
+			Responsive web design is the INVENTIVE WAY of adding FLEXIBILITY to your web design. 
+			Web design will be smart enough to adapt to the browser of end-user's devices, be it desktop, tablet, iPhone, iPad or other smart devices. 
+			We develop WordPress and Business Catalyst web site as a responsive web site.
+		</p>		
+			 <ul>
+			 	<li>Dynamic Web Sites</li>
+			 	<li>E-Commerce Web sites</li>
+			 	<li>PSD to HTML5/CSS3</li>
+			 	<li>Interactivity using jQuery</li>
+			 </ul>
+
+	</div>		
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>	
+</div>
+
+
+<div data-role="page" id="phonegap"> 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href="#service" class="ui-btn-active ui-state-persist"data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button" data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button" data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div data-role="content"> 	
+		<img src="phonegap_logo.png"/>
+		<h3>Phone Gap</h3>
+		<p>
+			We build Mobile Applications using HTML5/CSS3 and Ruby On Rails on the back-end which enables us to be agile and productive. 
+			Using the same codebase to deploy on multiple Mobile platforms. 
+			Which is fast, reliable, scalable and highly customized for your needs. 
+			We take your idea and convert that into a Mobile App Business.
+		</p>		
+			 <ul>
+			 	<li>HTML5 Canvas based applications</li>
+			 	<li>Using all the native functions of the mobile/tablet.</li>			 
+			 </ul>
+
+	</div>		
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>	
+</div>
+
+<div data-role="page" id="facebook"> 
+	<header data-role='header' data-position="fixed">
+		<nav data-role='navbar'>
+			<ul>
+				<li><a href="#home" data-role="button" data-icon="home" data-transition="flip">Home</a></li>
+				<li><a href="#service" class="ui-btn-active ui-state-persist" data-icon="work" data-transition="slide">Service</a></li>
+	   		<li><a href="#portfolio" data-role="button"  data-icon="grid" data-transition="slideup">Portfolio</a></li>
+	   		<li><a href="#contact" data-role="button" data-icon="info" data-transition="slidedown">Contact</a></li>
+			</ul>
+		</nav>		
+	</header>
+	<div data-role="content"> 	
+		<img src="facebook_logo.png"/>
+		<h3>Facebook Applications</h3>
+		<p>
+			We build facebook applications using HTML5/CSS3 and Ruby On Rails as the backend which enables us to be agile and productive. 
+			We give you Facebook solutions that are fast, reliable, scalable and highly customized for your needs. 
+			We take on a client project and make their idea an online business.
+		</p>		
+			 <ul>
+			 	<li>HTML5 Canvas based games</li>
+			 	<li>Custom Facebook Applications</li>			 
+			 </ul>
+
+	</div>		
+	<footer data-role='footer' data-position='fixed'>
+		<header data-position='fixed' data-role="footer">
+			<p>&#169; Copyright 2012 PandaWeb.in</p>	
+		</header>			 
+	</footer>	
+</div>
+
+
+
+
+</body>
+</html>
